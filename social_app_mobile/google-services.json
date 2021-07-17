@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "604591025446",
+    "firebase_url": "https://personalmanager-6750d.firebaseio.com",
+    "project_id": "personalmanager-6750d",
+    "storage_bucket": "personalmanager-6750d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:604591025446:android:c78746acea276dbab225e7",
+        "android_client_info": {
+          "package_name": "com.vicky.chatMe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "604591025446-i4ecg6s8le3pma5so2o23g5ns845pl1l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRWdU8XJILPYeLd7DTgK4hj_qwB6yyjUY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "604591025446-i4ecg6s8le3pma5so2o23g5ns845pl1l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
