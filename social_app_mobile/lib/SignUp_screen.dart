@@ -220,8 +220,6 @@ class _SignUpPageState extends State<SignUpPage> {
                 _buildPasswordRow(),
                 _buildForgetPasswordButton(),
                 _buildSignUpButton(),
-                _buildOrRow(),
-                _buildSocialBtnRow(),
               ],
             ),
           ),

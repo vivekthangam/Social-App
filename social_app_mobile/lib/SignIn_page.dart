@@ -3,7 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
+import 'TestWidgetsList.dart';
+import 'Utils/PreferencesHelper.dart';
 import 'SignUp_screen.dart';
 import 'config/config.dart';
 import 'constat.dart';
@@ -296,16 +297,18 @@ class _SignInPageState extends State<SignInPage> {
     var url = '$api_url/api/auth/signin';
     var response =
         await http.post(url, body: {"username": email, "password": password});
-    // showdialog(response.body);
-    Map mapRes = json.decode(response.body);
-    String token = mapRes['accessToken'];
-    print('token:$token');
-    saveValue('token', token);
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
-    String temp = await getValue("token");
+    Map jsonObj = jsonDecode(response.body);
+    String user = jsonEncode(jsonObj);
+    if (user != null) {
+      PreferencesHelper.setString('user', user);
 
-    print('shared refernce toke:$temp');
-    showdialog(context, temp);
+      showdialog(context, "User Logged in Successfully");
+      Navigator.of(context).pop();
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (context) => MyApp(),
+      ));
+    } else {
+      showdialog(context, "User Logged failed");
+    }
   }
 }

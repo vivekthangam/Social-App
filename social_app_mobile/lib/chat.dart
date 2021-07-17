@@ -1,4 +1,4 @@
-import 'package:chat_app/pages/home_page.dart';
+import 'package:Social/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 class chat_screen extends StatelessWidget {

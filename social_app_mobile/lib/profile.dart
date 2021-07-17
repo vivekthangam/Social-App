@@ -1,6 +1,6 @@
 import 'package:animated_theme_switcher/animated_theme_switcher.dart';
-import 'package:chat_app/constatnt/const.dart';
-import 'package:chat_app/widgets/profile_list_item.dart';
+import 'package:Social/constatnt/const.dart';
+import 'package:Social/widgets/profile_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';

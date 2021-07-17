@@ -1,5 +1,5 @@
-import 'package:chat_app/test/calender/calender.dart';
-import 'package:chat_app/test/local_notification_working.dart';
+import 'package:Social/test/calender/calender.dart';
+import 'package:Social/test/local_notification_working.dart';
 import 'package:flutter/material.dart';
 
 import 'SignIn_page.dart';

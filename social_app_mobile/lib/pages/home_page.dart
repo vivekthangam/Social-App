@@ -1,5 +1,5 @@
-import 'package:chat_app/constatnt/data.dart';
-import 'package:chat_app/theme/colors.dart';
+import 'package:Social/constatnt/data.dart';
+import 'package:Social/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 
