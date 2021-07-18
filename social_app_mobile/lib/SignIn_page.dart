@@ -296,10 +296,11 @@ class _SignInPageState extends State<SignInPage> {
   signinIn() async {
     var url = '$api_url/api/auth/signin';
     var response =
-        await http.post(url, body: {"username": email, "password": password});
+        await http.post(url, body: {"email": email, "password": password});
     Map jsonObj = jsonDecode(response.body);
     String user = jsonEncode(jsonObj);
-    if (user != null) {
+    var responsebody = json.decode(response.body);
+    if (responsebody["success"] != null && responsebody["success"] == true) {
       PreferencesHelper.setString('user', user);
 
       showdialog(context, "User Logged in Successfully");

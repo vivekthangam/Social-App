@@ -24,7 +24,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   Widget page = SignInPage();
-  Future getSharedPrefs() async {
+  getSharedPrefs() async {
     String user = await PreferencesHelper.getString('user');
 
     if (user != null) {
@@ -36,6 +36,11 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    getSharedPrefs().then((_) {
+      Navigator.of(context)
+          .pushReplacement(MaterialPageRoute(builder: (_) => this.page));
+    });
+
     Timer(Duration(seconds: 5), () {
       Navigator.of(context)
           .pushReplacement(MaterialPageRoute(builder: (_) => this.page));

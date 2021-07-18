@@ -21,6 +21,14 @@ Future<void> showdialog(BuildContext ctx, String data) async {
         child: new Text(data),
         onPressed: () => Navigator.pop(ctx, true),
       ),
+      actions: <Widget>[
+        TextButton(
+          child: const Text('Okay'),
+          onPressed: () {
+            Navigator.of(ctx).pop();
+          },
+        ),
+      ],
     ),
   );
 }

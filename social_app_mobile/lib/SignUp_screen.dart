@@ -17,6 +17,7 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
   String email, password, name;
+  int phone;
   Widget _buildLogo() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -93,6 +94,27 @@ class _SignUpPageState extends State<SignUpPage> {
             color: mainColor,
           ),
           labelText: 'Password',
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPhoneRow() {
+    return Padding(
+      padding: EdgeInsets.all(8),
+      child: TextFormField(
+        keyboardType: TextInputType.number,
+        onChanged: (value) {
+          setState(() {
+            phone = num.tryParse(value);
+          });
+        },
+        decoration: InputDecoration(
+          prefixIcon: Icon(
+            FontAwesomeIcons.phone,
+            color: mainColor,
+          ),
+          labelText: 'Phone',
         ),
       ),
     );
@@ -217,6 +239,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 _buildEmailRow(),
                 _buildUserNameRow(),
+                _buildPhoneRow(),
                 _buildPasswordRow(),
                 _buildForgetPasswordButton(),
                 _buildSignUpButton(),
@@ -313,11 +336,61 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   signUp() async {
+    var client = new http.Client();
     var url = '$api_url/api/auth/signup';
-    var response = await http.post(url,
-        body: {"username": name, "email": email, "password": password});
-    showdialog(context, response.body);
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
+    final Map<String, dynamic> reqbody = {
+      "username": name,
+      "email": email,
+      "phone": phone,
+      "password": password
+    };
+    var reqbody1 = json.encode(reqbody);
+    client.post(Uri.encodeFull(url),
+        body: json.encode(reqbody),
+        headers: {"content-type": "application/json"}).then((response) {
+      client.close();
+      var responsebody;
+      if (response.body != null) {
+        responsebody = json.decode(response.body);
+        if (this.mounted && response.statusCode == 200) {
+          //enter your code for change state
+          showdialog(context, response.body);
+
+          print(responsebody["sucess"]);
+          if (responsebody["sucess"] == true) {
+            showdialog(context, "Logged in Successfully");
+            Navigator.of(context).pop();
+            Navigator.of(context).pushReplacement(MaterialPageRoute(
+              builder: (context) => SignInPage(),
+            ));
+          } else {
+            showdialog(context,
+                "Logged in failed \n Error Message:${responsebody["error"]}");
+          }
+          print("Error: ${response.body}");
+
+          print('Response status: ${response.statusCode}');
+          print('Response body: ${response.body}');
+        } else {
+          showdialog(context,
+              "Logged in failed \n Error Message:${responsebody["error"]}");
+        }
+      }
+    }).catchError((onError) {
+      client.close();
+      showdialog(context, onError);
+      print("Error: $onError");
+    });
   }
+}
+
+String numberValidator(String value) {
+  if (value == null) {
+    return null;
+  }
+  final n = num.tryParse(value);
+  if (n == null) {
+    return '"$value" is not a valid number';
+  }
+  return null;
 }
