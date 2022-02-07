@@ -43,6 +43,11 @@ class PreferencesHelper {
     return p.setDouble(key, value);
   }
 
+  static Future removeValue(String key) async {
+    final p = await prefs;
+    return p.remove(key);
+  }
+
   // helper
 
   static Future<SharedPreferences> get prefs => SharedPreferences.getInstance();

@@ -1,12 +1,11 @@
-import 'package:Social/SignIn_page.dart';
 import 'package:Social/chat.dart';
 import 'package:Social/profile.dart';
 import 'package:Social/syncloader.dart';
 import 'package:Social/test/calender/calender.dart';
 import 'package:Social/test/local_notification_working.dart';
 import 'package:flutter/material.dart';
-
-import 'SignUp_screen.dart';
+import 'SignIn_page.dart';
+import 'utils/PreferencesHelper.dart';
 import 'image_upload.dart';
 import 'lazyLoading.dart';
 
@@ -104,6 +103,20 @@ class SomeApp extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) => HomeAsync(),
+              ),
+            );
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.location_city),
+          title: Text("Logout", textDirection: TextDirection.ltr),
+          onTap: () {
+            PreferencesHelper.removeValue('user');
+            Navigator.of(context).pop();
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SignInPage(),
               ),
             );
           },

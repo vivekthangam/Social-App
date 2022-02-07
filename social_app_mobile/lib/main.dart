@@ -1,66 +1,18 @@
-import 'dart:async';
-
+import 'package:Social/pages/Chat/chat.dart';
+import 'package:Social/pages/Chat/welcome_screen.dart';
 import 'package:flutter/material.dart';
 
-import 'SignIn_page.dart';
-import 'TestWidgetsList.dart';
-import 'utils/PreferencesHelper.dart';
+import 'pages/Chat/ChatConstant.dart';
 
-void main() => runApp(ApplicationInit());
+void main() => runApp(MyApp());
 
-class ApplicationInit extends StatelessWidget {
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: SplashScreen(),
+      debugShowCheckedModeBanner: false,
+      home: WelcomeScreen(),
     );
-  }
-}
-
-class SplashScreen extends StatefulWidget {
-  @override
-  _SplashScreenState createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-  Widget page = SignInPage();
-  getSharedPrefs() async {
-    String user = await PreferencesHelper.getString('user');
-
-    if (user != null) {
-      print(user);
-      this.page = MyApp();
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    getSharedPrefs().then((_) {
-      Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (_) => this.page));
-    });
-
-    Timer(Duration(seconds: 5), () {
-      Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (_) => this.page));
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.white,
-        body: Center(
-            child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset('assets/images/logoBMW.png', height: 120),
-            SizedBox(height: 20),
-            CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
-            )
-          ],
-        )));
   }
 }
